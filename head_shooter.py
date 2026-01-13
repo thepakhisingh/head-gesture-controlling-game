@@ -7,13 +7,13 @@ import time
 import math
 import sys
 
-# ================= CAMERA =================
+# CAMERA
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Camera not found")
     sys.exit()
 
-# ================= MEDIAPIPE =================
+#  MEDIAPIPE 
 mp_face = mp.solutions.face_mesh
 face_mesh = mp_face.FaceMesh(
     static_image_mode=False,
@@ -25,7 +25,7 @@ NOSE_ID = 1
 LEFT_EAR = [159, 145, 33, 133]
 RIGHT_EAR = [386, 374, 362, 263]
 
-# ================= PYGAME =================
+# PYGAME 
 pygame.init()
 WIDTH, HEIGHT = 600, 800
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -35,7 +35,7 @@ clock = pygame.time.Clock()
 FONT_BIG = pygame.font.SysFont(None, 56)
 FONT_MED = pygame.font.SysFont(None, 42)
 
-# ================= PLAYER =================
+# PLAYER 
 player_x = WIDTH // 2
 player_y = HEIGHT - 80
 player_w, player_h = 60, 40
@@ -45,20 +45,20 @@ DEAD_ZONE = 25
 MAX_SPEED = 10
 SMOOTHING = 0.08
 
-# ================= BULLETS / ENEMIES =================
+# BULLETS / ENEMIES
 bullets = []
 enemies = []
 
 def new_enemy():
     return pygame.Rect(random.randint(20, WIDTH-60), -40, 50, 40)
 
-# ================= CALIBRATION =================
+#  CALIBRATION
 calibrated = False
 calib_vals = []
 calib_start = time.time()
 neutral_head_x = 0
 
-# ================= BLINK =================
+# BLINK 
 def eye_ratio(eye):
     A = math.dist(eye[0], eye[1])
     B = math.dist(eye[2], eye[3])
@@ -66,17 +66,17 @@ def eye_ratio(eye):
 
 blink_cd = 0
 
-# ================= GAME STATE =================
+# GAME STATE
 running = True
 game_over = False
 score = 0
 
-# ❤️ HEARTS
+# HEARTS
 lives = 3
 INVINCIBLE_TIME = 60
 invincible_timer = 0
 
-# ================= HUD FUNCTION =================
+#  HUD FUNCTION 
 def draw_center_hud(surface, score, lives):
     hud = pygame.Surface((WIDTH, 150), pygame.SRCALPHA)
     hud.set_alpha(100)  # opacity (0–255)
@@ -91,7 +91,7 @@ def draw_center_hud(surface, score, lives):
 
     surface.blit(hud, (0, HEIGHT//2 - 75))
 
-# ================= GAME LOOP =================
+# GAME LOOP
 while running:
     clock.tick(60)
     screen.fill((18, 18, 18))
@@ -191,7 +191,7 @@ while running:
     for en in enemies:
         pygame.draw.rect(screen, (255, 0, 0), en)
 
-    # 💗 CENTER HUD
+    # heart CENTER HUD
     draw_center_hud(screen, score, lives)
 
     if not calibrated:
@@ -205,7 +205,8 @@ while running:
         screen.blit(t2, (WIDTH//2 - t2.get_width()//2, HEIGHT//2 + 150))
 
     pygame.display.update()
-
+#try it out and if you find any difficulty please contanct me or see codewithpakhi.com hehehe
 cap.release()
 pygame.quit()
 cv2.destroyAllWindows()
+
